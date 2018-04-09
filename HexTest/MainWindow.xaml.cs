@@ -21,7 +21,7 @@ namespace HexTest
     /// </summary>
     public partial class MainWindow : Window
     {
-        byte[] bytes;
+        BytesWrapper bytes = new BytesWrapper();
 
         public MainWindow()
         {
@@ -35,9 +35,10 @@ namespace HexTest
             Nullable<bool> result = dialog.ShowDialog();
             if (result == true)
             {
-                bytes = File.ReadAllBytes(dialog.FileName);
-                TextBoxHex.Text = BitConverter.ToString(bytes).Replace("-", " ");
-                TextBoxText.Text = Encoding.UTF8.GetString(bytes);
+                bytes.Bytes = File.ReadAllBytes(dialog.FileName);
+                //TextBoxHex.Text = bytes.BytesAsText;
+                TextBoxText.Text = bytes.Text;
+                icHex.ItemsSource = bytes.Bytes;
             }
             
         }
