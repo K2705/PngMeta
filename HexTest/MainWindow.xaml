@@ -7,9 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox x:Name="TextBoxHex" HorizontalAlignment="Left" Height="281" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="261"/>
-        <Button x:Name="OpenButton" Content="Open" HorizontalAlignment="Left" Margin="222,286,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.592,0.746" Click="OpenButton_Click"/>
-        <TextBox x:Name="TextBoxText" HorizontalAlignment="Left" Height="281" Margin="266,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="251"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="197*"/>
+            <ColumnDefinition Width="320*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="OpenButton" Content="Open" HorizontalAlignment="Left" Margin="25.02,286,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.592,0.746" Click="OpenButton_Click" Grid.Column="1"/>
+        <Grid HorizontalAlignment="Left" Height="286" VerticalAlignment="Top" Width="495" Grid.ColumnSpan="2" RenderTransformOrigin="0.487,0.324">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TextBoxHex" HorizontalAlignment="Left" Height="223" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontFamily="Source Code Pro Medium" Grid.Column="0"/>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="5"/>
+            <TextBox x:Name="TextBoxText" HorizontalAlignment="Left" Height="230" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" FontFamily="Source Code Pro Medium" Grid.Column="2"/>
+        </Grid>
 
     </Grid>
 </Window>
