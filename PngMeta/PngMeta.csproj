@@ -63,6 +63,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BLImageData.cs" />
+    <Compile Include="ByteUtils.cs" />
     <Compile Include="ChunkType.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

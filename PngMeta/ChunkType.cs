@@ -11,6 +11,7 @@ namespace PngMeta
         public byte[] Type { get; private set; }
         // Spooky bitshifting magic to get the fifth bit of each byte
         // Refer to https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-naming-conventions as to why
+        // TODO: Does not work
         public bool Ancillary { get { return (Type[0] & (1 << 4)) != 0; } }
         public bool Private { get { return (Type[1] & (1 << 4)) != 0; } }
         public bool Reserved { get { return (Type[2] & (1 << 4)) != 0; } }
@@ -44,7 +45,7 @@ namespace PngMeta
             {
                 chars[i] = (char)Type[i];
             }
-            return chars.ToString();
+            return new string(chars);
         }
 
         public override int GetHashCode()

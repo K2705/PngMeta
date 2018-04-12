@@ -15,7 +15,7 @@ namespace PngMeta
 
         public PngDataChunk(byte[] chunkBytes)
         {
-            Length = BitConverter.ToUInt32(chunkBytes, 0);
+            Length = ByteUtils.ToUInt32(chunkBytes, 0);
             byte[] type = new byte[4];
             //for (int i = 0; i < 4; i++)
             //{
@@ -29,13 +29,13 @@ namespace PngMeta
             //    Data[i] = chunkBytes[i + 8];
             //}
             Array.Copy(chunkBytes, 8, Data, 0, Length);
-            CRC = BitConverter.ToUInt32(chunkBytes, (int)(Length + 8));
+            CRC = ByteUtils.ToUInt32(chunkBytes, (int)(Length + 8));
             
         }
 
         public PngDataChunk(UInt32 length, ChunkType type, byte[] data, UInt32 CRC)
         {
-            if (data.Length != Length)
+            if (data.Length != length)
             {
                 throw new ArgumentOutOfRangeException("data", "field length mismatch");
             }
@@ -54,10 +54,10 @@ namespace PngMeta
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[Length + 12];
-            Array.Copy(BitConverter.GetBytes(Length), 0, bytes, 0, 4);
+            Array.Copy(ByteUtils.GetBytes(Length), 0, bytes, 0, 4);
             Array.Copy(Type.Type, 0, bytes, 4, 4);
             Array.Copy(Data, 0, bytes, 8, Length);
-            Array.Copy(BitConverter.GetBytes(CRC), 0, bytes, Length + 8, 4);
+            Array.Copy(ByteUtils.GetBytes(CRC), 0, bytes, Length + 8, 4);
 
             return bytes;
         }
@@ -88,9 +88,9 @@ namespace PngMeta
                 ret.Append(b);
             }
             ret.Append(' ');
-            foreach (byte b in BitConverter.GetBytes(CRC))
+            foreach (byte b in ByteUtils.GetBytes(CRC))
             {
-                ret.Append(b);
+                ret.Append(b); // TODO: Does not work
             }
 
             return ret.ToString();

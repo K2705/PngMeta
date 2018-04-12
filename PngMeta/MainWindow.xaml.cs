@@ -22,6 +22,7 @@ namespace PngMeta
     public partial class MainWindow : Window
     {
         byte[] fileBytes;
+        List<PngDataChunk> fileChunks;
 
         public MainWindow()
         {
@@ -40,7 +41,10 @@ namespace PngMeta
 
                 fileBytes = File.ReadAllBytes(dialog.FileName);
                 //myTextBox.Text = BitConverter.ToString(fileBytes).Replace("-", " ");
-                myTextBox.Text = Encoding.UTF8.GetString(fileBytes);
+                //myTextBox.Text = Encoding.UTF8.GetString(fileBytes);
+
+                fileChunks = BLImageData.GetChunks(fileBytes);
+                myTextBox.Text = string.Join(" ", fileChunks.Select(x => x.Type.ToString()));
             }
 
         }

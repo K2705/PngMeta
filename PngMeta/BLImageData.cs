@@ -24,7 +24,7 @@ namespace PngMeta
             while (true)
             {
                 // get the data
-                UInt32 chunkLength = BitConverter.ToUInt32(imageBytes, k);
+                UInt32 chunkLength = ByteUtils.ToUInt32(imageBytes, k);
                 k += 4;
                 ChunkType chunkType = new ChunkType(imageBytes, k);
                 k += 4;
@@ -33,7 +33,8 @@ namespace PngMeta
                 {
                     chunkData[i] = imageBytes[k];
                 }
-                UInt32 chunkCRC = BitConverter.ToUInt32(imageBytes, k);
+                UInt32 chunkCRC = ByteUtils.ToUInt32(imageBytes, k);
+                k += 4;
 
                 // create chunk from data and add it to list
                 PngDataChunk dataChunk = new PngDataChunk(chunkLength, chunkType, chunkData, chunkCRC);
