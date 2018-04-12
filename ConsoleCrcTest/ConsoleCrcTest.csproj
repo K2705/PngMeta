@@ -53,10 +53,11 @@
   <ItemGroup>
     <Content Include="test images\Broderskabet.png" />
     <Content Include="test images\customerpath_v1.png" />
-    <Content Include="test images\gradient_with_ztxt.png" />
+    <Content Include="test images\if_Inkscape_99712.png" />
     <Content Include="test images\JupiterThumbnailSmall.png" />
     <Content Include="test images\saturn.png" />
     <Content Include="test images\saturn_rubens.png" />
+    <Content Include="test images\vectorize-1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
