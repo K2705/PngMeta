@@ -9,19 +9,20 @@ namespace PngMeta
     class PngDataChunk
     {
         public UInt32 Length { get; private set; }
-        public byte[] Type { get; }
+        public ChunkType Type { get; }
         public byte[] Data { get; set; }
         public UInt32 CRC { get; private set; }
 
         public PngDataChunk(byte[] chunkBytes)
         {
             Length = BitConverter.ToUInt32(chunkBytes, 0);
-            Type = new byte[4];
+            byte[] type = new byte[4];
             //for (int i = 0; i < 4; i++)
             //{
             //    Type[i] = chunkBytes[i + 4];
             //}
-            Array.Copy(chunkBytes, 4, Type, 0, 4);
+            Array.Copy(chunkBytes, 4, type, 0, 4);
+            Type = new ChunkType(type);
             Data = new byte[Length];
             //for (int i = 0; i < Length; i++)
             //{
@@ -32,12 +33,8 @@ namespace PngMeta
             
         }
 
-        public PngDataChunk(UInt32 length, byte[] type, byte[] data, UInt32 CRC)
+        public PngDataChunk(UInt32 length, ChunkType type, byte[] data, UInt32 CRC)
         {
-            if (type.Length != 4)
-            {
-                throw new ArgumentOutOfRangeException("type", "field length mismatch");
-            }
             if (data.Length != Length)
             {
                 throw new ArgumentOutOfRangeException("data", "field length mismatch");
@@ -51,19 +48,14 @@ namespace PngMeta
 
         public string TypeString()
         {
-            char[] chars = new char[4];
-            for (int i = 0; i < 4; i++)
-            {
-                chars[i] = (char)Type[i];
-            }
-            return chars.ToString();
+            return Type.ToString();
         }
 
         public byte[] GetBytes()
         {
             byte[] bytes = new byte[Length + 12];
             Array.Copy(BitConverter.GetBytes(Length), 0, bytes, 0, 4);
-            Array.Copy(Type, 0, bytes, 4, 4);
+            Array.Copy(Type.Type, 0, bytes, 4, 4);
             Array.Copy(Data, 0, bytes, 8, Length);
             Array.Copy(BitConverter.GetBytes(CRC), 0, bytes, Length + 8, 4);
 
@@ -86,7 +78,7 @@ namespace PngMeta
             StringBuilder ret = new StringBuilder();
             ret.Append(Length);
             ret.Append(' ');
-            foreach (byte b in Type)
+            foreach (byte b in Type.Type)
             {
                 ret.Append((char)b);
             }

@@ -21,6 +21,8 @@ namespace PngMeta
     /// </summary>
     public partial class MainWindow : Window
     {
+        byte[] fileBytes;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -36,7 +38,7 @@ namespace PngMeta
             {
                 myImage.Source = new BitmapImage(new Uri(dialog.FileName));
 
-                byte[] fileBytes = File.ReadAllBytes(dialog.FileName);
+                fileBytes = File.ReadAllBytes(dialog.FileName);
                 //myTextBox.Text = BitConverter.ToString(fileBytes).Replace("-", " ");
                 myTextBox.Text = Encoding.UTF8.GetString(fileBytes);
             }
