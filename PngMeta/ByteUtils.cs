@@ -28,5 +28,22 @@ namespace PngMeta
             bytes[3] = (byte)number;
             return bytes;
         }
+
+        public static string ParseAscii(byte[] buffer)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in buffer)
+            {
+                if (b < 32 || b > 126) // non-printing character
+                {
+                    sb.Append('.');
+                }
+                else
+                {
+                    sb.Append((char)b);
+                }
+            }
+            return sb.ToString();
+        }
     }
 }

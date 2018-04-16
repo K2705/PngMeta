@@ -7,9 +7,70 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="420.588" Width="758.333">
     <Grid>
-        <Image x:Name="myImage" HorizontalAlignment="Left" Height="309" VerticalAlignment="Top" Width="254"/>
-        <TextBox x:Name="myTextBox" HorizontalAlignment="Left" Height="281" Margin="372,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="345"/>
-        <Button Content="Open" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="179,351,0,0" Click="Button_Click"/>
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock x:Name="uiChunkListTitle" Text="No image loaded" />
+                    <ListBox x:Name="uiChunkList" Width="100" SelectionChanged="uiChunkList_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Type}" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+                <TabControl Grid.Column="1">
+                    <TabItem Header="Chunk contents">
+                        <DataGrid x:Name="dgChunkContents" />
+                    </TabItem>
+                    <TabItem Header="View raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel x:Name="spRawHex" Grid.Column="0"/>
+                            <StackPanel x:Name="spRawAscii" Grid.Column="1"/>
+                            <!--<ItemsControl x:Name="tStackHex" Grid.Column="0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <ItemsControl x:Name="tStackAscii" Grid.Column="1">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>-->
+                            <!--<TextBox x:Name="tbRawViewHex" TextWrapping="Wrap" FontFamily="Consolas" />
+                            <TextBox x:Name="tbRawViewAscii" TextWrapping="Wrap" FontFamily="Consolas" Grid.Column="1" />-->
+                        </Grid>
+                    </TabItem>
+                </TabControl>
 
+                
+                
+                <Image x:Name="uiPreviewImage" Grid.Column="2"/>
+            </Grid>
+            <Button Content="Open" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

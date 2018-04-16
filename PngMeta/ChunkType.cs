@@ -38,6 +38,11 @@ namespace PngMeta
             }
         }
 
+        public string Description()
+        {
+            return Description(this);
+        }
+
         public override string ToString()
         {
             char[] chars = new char[4];
@@ -60,6 +65,60 @@ namespace PngMeta
             ChunkType t = obj as ChunkType;
             if (t == null) return false;
             return Type.SequenceEqual(t.Type);
+        }
+
+        public static string Description(ChunkType chunkType)
+        {
+            switch (chunkType.ToString())
+            {
+                // critical chunks
+                case "IHDR":
+                    return "image header, the first chunk in a PNG datastream";
+                case "PLTE":
+                    return "palette table";
+                case "IDAT":
+                    return "image data chunk";
+                case "IEND":
+                    return "image trailer, the last chunk in a PNG datastream";
+
+                // ancillary chunks
+                case "tRNS":
+                    return "transparency information";
+
+                case "cHRM":
+                    return "primary chromaticities and white point";
+                case "gAMA":
+                    return "image gamma";
+                case "iCCP":
+                    return "embedded ICC profile";
+                case "sBIT":
+                    return "significant bits";
+                case "sRGB":
+                    return "standard RGB color space";
+                    
+                case "tEXt":
+                    return "textual data";
+                case "zTXt":
+                    return "compressed textual data";
+                case "iTXt":
+                    return "international textual data";
+
+                case "bKGD":
+                    return "background color";
+                case "hIST":
+                    return "image histogram";
+                case "pHYs":
+                    return "physical pixel dimensions";
+                case "sPLT":
+                    return "suggested palette";
+
+                case "tIME":
+                    return "image last-modification time";
+
+                // ???
+                default:
+                    return "unknown chunk";
+            }
         }
     }
 }

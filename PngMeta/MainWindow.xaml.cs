@@ -37,16 +37,45 @@ namespace PngMeta
             Nullable<bool> result = dialog.ShowDialog();
             if (result == true)
             {
-                myImage.Source = new BitmapImage(new Uri(dialog.FileName));
+                uiPreviewImage.Source = new BitmapImage(new Uri(dialog.FileName));
 
                 fileBytes = File.ReadAllBytes(dialog.FileName);
                 //myTextBox.Text = BitConverter.ToString(fileBytes).Replace("-", " ");
                 //myTextBox.Text = Encoding.UTF8.GetString(fileBytes);
 
                 fileChunks = BLImageData.GetChunks(fileBytes);
-                myTextBox.Text = string.Join(" ", fileChunks.Select(x => x.Type.ToString()));
+                uiChunkList.ItemsSource = fileChunks;
+                uiChunkListTitle.Text = fileChunks.Count + " chunks read";
             }
 
         }
+
+        private void uiChunkList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PngDataChunk currentChunk = uiChunkList.SelectedItem as PngDataChunk;
+            if (currentChunk != null)
+            {
+                //tbRawViewHex.Text = BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " ");
+                //tbRawViewAscii.Text = ByteUtils.ParseAscii(currentChunk.GetBytes());
+                spRawHex.Children.Clear();
+                StringToChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
+                spRawAscii.Children.Clear();
+                StringToChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
+                
+            }
+        }
+
+        public static void StringToChunks(StackPanel panel, string str, int size)
+        {
+            for (int i = 0; i < str.Length; i += size)
+            {
+                TextBlock tb = new TextBlock();
+                tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
+                tb.FontFamily = new FontFamily("Consolas");
+                panel.Children.Add(tb);
+            }
+            //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));
+        }
+
     }
 }
