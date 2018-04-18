@@ -21,8 +21,9 @@ namespace PngMeta
     /// </summary>
     public partial class MainWindow : Window
     {
-        byte[] fileBytes;
-        List<PngDataChunk> fileChunks;
+        //byte[] fileBytes;
+        //List<PngDataChunk> fileChunks;
+        ImageWrapper imageWrapper = new ImageWrapper();
 
         public MainWindow()
         {
@@ -37,15 +38,12 @@ namespace PngMeta
             Nullable<bool> result = dialog.ShowDialog();
             if (result == true)
             {
-                uiPreviewImage.Source = new BitmapImage(new Uri(dialog.FileName));
-
-                fileBytes = File.ReadAllBytes(dialog.FileName);
-                //myTextBox.Text = BitConverter.ToString(fileBytes).Replace("-", " ");
-                //myTextBox.Text = Encoding.UTF8.GetString(fileBytes);
-
-                fileChunks = BLImageData.GetChunks(fileBytes);
-                uiChunkList.ItemsSource = fileChunks;
-                uiChunkListTitle.Text = fileChunks.Count + " chunks read";
+                imageWrapper.LoadImage(dialog.FileName);
+                // TODO: deal w/ exception
+                
+                uiPreviewImage.Source = imageWrapper.Image;
+                uiChunkList.ItemsSource = imageWrapper.FileChunks;
+                uiChunkListTitle.Text = imageWrapper.FileChunks.Count + " chunks read";
             }
 
         }
@@ -61,7 +59,8 @@ namespace PngMeta
                 StringToChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 spRawAscii.Children.Clear();
                 StringToChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
-                
+
+                Console.WriteLine(currentChunk.ToString());
             }
         }
 
@@ -69,9 +68,10 @@ namespace PngMeta
         {
             for (int i = 0; i < str.Length; i += size)
             {
-                TextBlock tb = new TextBlock();
-                tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
+                TextBox tb = new TextBox();
+                tb.IsReadOnly = true;
                 tb.FontFamily = new FontFamily("Consolas");
+                tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
                 panel.Children.Add(tb);
             }
             //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));

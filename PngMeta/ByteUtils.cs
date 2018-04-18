@@ -22,9 +22,9 @@ namespace PngMeta
         public static byte[] GetBytes(UInt32 number)
         {
             byte[] bytes = new byte[4];
-            bytes[0] = (byte)(number << 24);
-            bytes[1] = (byte)(number << 16);
-            bytes[2] = (byte)(number << 8);
+            bytes[0] = (byte)(number >> 24);
+            bytes[1] = (byte)(number >> 16);
+            bytes[2] = (byte)(number >> 8);
             bytes[3] = (byte)number;
             return bytes;
         }

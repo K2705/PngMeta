@@ -90,7 +90,7 @@ namespace PngMeta
             ret.Append(' ');
             foreach (byte b in ByteUtils.GetBytes(CRC))
             {
-                ret.Append(b); // TODO: Does not work
+                ret.Append(b.ToString("X2")); 
             }
 
             return ret.ToString();
