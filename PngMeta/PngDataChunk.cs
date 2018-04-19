@@ -8,10 +8,23 @@ namespace PngMeta
 {
     public class PngDataChunk
     {
+        private byte[] data;
+
         public UInt32 Length { get; private set; }
         public ChunkType Type { get; }
-        public byte[] Data { get; set; }
+        public byte[] Data
+        {
+            get
+            {
+                if (ParsedData != null)
+                    return ParsedData.GetBytes();
+                else
+                    return data;
+            }
+        }
         public UInt32 CRC { get; private set; }
+        public ParsedChunkData ParsedData { get; set; }
+        
 
         public PngDataChunk()
         {
@@ -21,20 +34,31 @@ namespace PngMeta
         {
             Length = ByteUtils.ToUInt32(chunkBytes, 0);
             byte[] type = new byte[4];
-            //for (int i = 0; i < 4; i++)
-            //{
-            //    Type[i] = chunkBytes[i + 4];
-            //}
             Array.Copy(chunkBytes, 4, type, 0, 4);
             Type = new ChunkType(type);
-            Data = new byte[Length];
-            //for (int i = 0; i < Length; i++)
-            //{
-            //    Data[i] = chunkBytes[i + 8];
-            //}
-            Array.Copy(chunkBytes, 8, Data, 0, Length);
+            data = new byte[Length];
+            Array.Copy(chunkBytes, 8, data, 0, Length);
             CRC = ByteUtils.ToUInt32(chunkBytes, (int)(Length + 8));
-            
+
+            ParseData();
+        }
+
+        private void ParseData()
+        {
+            switch (Type.ToString())
+            {
+                case "IHDR":
+                    ParsedData = new ParsedIHDR(data);
+                    break;
+                case "gAMA":
+                    ParsedData = new ParsedGAMA(data);
+                    break;
+                case "tEXT":
+                    ParsedData = new ParsedTEXT(data);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public PngDataChunk(UInt32 length, ChunkType type, byte[] data, UInt32 CRC)
@@ -46,8 +70,10 @@ namespace PngMeta
 
             this.Length = length;
             this.Type = type;
-            this.Data = data;
+            this.data = data;
             this.CRC = CRC;
+
+            ParseData();
         }
 
         public string TypeString()
@@ -60,7 +86,7 @@ namespace PngMeta
             byte[] bytes = new byte[Length + 12];
             Array.Copy(ByteUtils.GetBytes(Length), 0, bytes, 0, 4);
             Array.Copy(Type.Type, 0, bytes, 4, 4);
-            Array.Copy(Data, 0, bytes, 8, Length);
+            Array.Copy(data, 0, bytes, 8, Length);
             Array.Copy(ByteUtils.GetBytes(CRC), 0, bytes, Length + 8, 4);
 
             return bytes;
@@ -69,7 +95,7 @@ namespace PngMeta
 
         public void UpdateLength()
         {
-            Length = (uint)Data.Length;
+            Length = (uint)data.Length;
         }
 
         public void UpdateCrc()
@@ -77,12 +103,13 @@ namespace PngMeta
             //TODO
         }
 
-        public virtual List<KeyValuePair<string, string>> ChunkData()
-        {
-            List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
-            ret.Add(new KeyValuePair<string, string>(Type.ToString(), "Cannot display chunk contents."));
-            return ret;
-        }
+        //public virtual List<KeyValuePair<string, string>> ChunkData()
+        //{
+        //    List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
+        //    ret.Add(new KeyValuePair<string, string>(Type.ToString(), "Cannot display chunk contents."));
+        //    return ret;
+        //}
+        
 
         public override string ToString()
         {
@@ -94,7 +121,7 @@ namespace PngMeta
                 ret.Append((char)b);
             }
             ret.Append(' ');
-            foreach (byte b in Data)
+            foreach (byte b in data)
             {
                 ret.Append(b);
             }
@@ -108,8 +135,4 @@ namespace PngMeta
         }
     }
 
-    public class GAMADataChunk : PngDataChunk
-    {
-
-    }
 }
