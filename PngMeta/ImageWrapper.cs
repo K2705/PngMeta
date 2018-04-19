@@ -25,7 +25,7 @@ namespace PngMeta
             FilePath = new Uri(path);
             Image = new BitmapImage(FilePath);
             FileBytes = File.ReadAllBytes(path);
-            FileChunks = BLImageData.GetChunks(FileBytes);
+            FileChunks = ImageData.GetChunks(FileBytes);
         }
 
     }

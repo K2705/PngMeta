@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
-    static class BLImageData
+    static class ImageData
     {
         
         public static List<PngDataChunk> GetChunks(byte[] imageBytes)

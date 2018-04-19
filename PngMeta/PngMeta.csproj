@@ -62,7 +62,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BLImageData.cs" />
+    <Compile Include="blImageData.cs" />
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ChunkType.cs" />
     <Compile Include="ImageWrapper.cs" />
@@ -72,6 +72,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ParsedData.cs" />
     <Compile Include="PngDataChunk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
