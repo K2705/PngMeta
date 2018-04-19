@@ -53,7 +53,7 @@ namespace PngMeta
                 case "gAMA":
                     ParsedData = new ParsedGAMA(data);
                     break;
-                case "tEXT":
+                case "tEXt":
                     ParsedData = new ParsedTEXT(data);
                     break;
                 default:
