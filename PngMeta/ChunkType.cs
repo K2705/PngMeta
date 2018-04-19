@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
-    class ChunkType
+    public class ChunkType
     {
         public byte[] Type { get; private set; }
         // Spooky bitshifting magic to get the fifth bit of each byte
@@ -66,6 +66,7 @@ namespace PngMeta
             if (t == null) return false;
             return Type.SequenceEqual(t.Type);
         }
+
 
         public static string Description(ChunkType chunkType)
         {

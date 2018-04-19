@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
-    class PngDataChunk
+    public class PngDataChunk
     {
         public UInt32 Length { get; private set; }
         public ChunkType Type { get; }
         public byte[] Data { get; set; }
         public UInt32 CRC { get; private set; }
+
+        public PngDataChunk()
+        {
+        }
 
         public PngDataChunk(byte[] chunkBytes)
         {
@@ -73,6 +77,13 @@ namespace PngMeta
             //TODO
         }
 
+        public virtual List<KeyValuePair<string, string>> ChunkData()
+        {
+            List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
+            ret.Add(new KeyValuePair<string, string>(Type.ToString(), "Cannot display chunk contents."));
+            return ret;
+        }
+
         public override string ToString()
         {
             StringBuilder ret = new StringBuilder();
@@ -95,5 +106,10 @@ namespace PngMeta
 
             return ret.ToString();
         }
+    }
+
+    public class GAMADataChunk : PngDataChunk
+    {
+
     }
 }

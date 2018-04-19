@@ -55,6 +55,7 @@ namespace PngMeta
             {
                 //tbRawViewHex.Text = BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " ");
                 //tbRawViewAscii.Text = ByteUtils.ParseAscii(currentChunk.GetBytes());
+                dgChunkContents.ItemsSource = currentChunk.ChunkData();
                 spRawHex.Children.Clear();
                 StringToChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 spRawAscii.Children.Clear();
