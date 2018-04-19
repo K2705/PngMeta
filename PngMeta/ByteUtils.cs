@@ -19,7 +19,28 @@ namespace PngMeta
             return (UInt32)value;
         }
 
+        public static Int32 ToInt32(byte[] buffer)
+        {
+            return ToInt32(buffer, 0);
+        }
+
+        public static Int32 ToInt32(byte[] buffer, int index)
+        {
+            int value = buffer[index++] << 24 | buffer[index++] << 16 | buffer[index++] << 8 | buffer[index++];
+            return value;
+        }
+
         public static byte[] GetBytes(UInt32 number)
+        {
+            byte[] bytes = new byte[4];
+            bytes[0] = (byte)(number >> 24);
+            bytes[1] = (byte)(number >> 16);
+            bytes[2] = (byte)(number >> 8);
+            bytes[3] = (byte)number;
+            return bytes;
+        }
+
+        public static byte[] GetBytes(Int32 number)
         {
             byte[] bytes = new byte[4];
             bytes[0] = (byte)(number >> 24);
