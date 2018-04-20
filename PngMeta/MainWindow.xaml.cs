@@ -56,17 +56,31 @@ namespace PngMeta
                 //tbRawViewHex.Text = BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " ");
                 //tbRawViewAscii.Text = ByteUtils.ParseAscii(currentChunk.GetBytes());
                 //if (currentChunk.ParsedData != null)
-                    dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
+                //dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
+
+                //ColumnDefinition column = new ColumnDefinition();
+                //column.MinWidth = 300;
+                //grChunkContents.ColumnDefinitions.Add(column);
+                //column = new ColumnDefinition();
+                //column.MinWidth = 100;
+                //grChunkContents.ColumnDefinitions.Add(column);
+                //StackPanel spLeft = new StackPanel();
+                //StackPanel spRight = new StackPanel();
+                //grChunkContents.Children.Add(spLeft);
+                //grChunkContents.Children.Add(spRight);
+
+                tabChunkContents.Content = new CtrlShowIHDR();
+
                 spRawHex.Children.Clear();
-                StringToChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
+                DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 spRawAscii.Children.Clear();
-                StringToChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
+                DrawHexView(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
 
                 Console.WriteLine(currentChunk.ToString());
             }
         }
 
-        public static void StringToChunks(StackPanel panel, string str, int size)
+        public static void DrawHexView(StackPanel panel, string str, int size)
         {
             for (int i = 0; i < str.Length; i += size)
             {
