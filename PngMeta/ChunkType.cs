@@ -10,13 +10,12 @@ namespace PngMeta
     {
         private string strType;
         public byte[] Type { get; private set; }
-        // Spooky bitshifting magic to get the fifth bit of each byte
+        // Spooky bitshifting magic to get bit five of each byte
         // Refer to https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-naming-conventions as to why
-        // TODO: Does not work
-        public bool Ancillary { get { return (Type[0] & (1 << 4)) != 0; } }
-        public bool Private { get { return (Type[1] & (1 << 4)) != 0; } }
-        public bool Reserved { get { return (Type[2] & (1 << 4)) != 0; } }
-        public bool SafeToCopy { get { return (Type[3] & (1 << 4)) != 0; } }
+        public bool Ancillary { get { return (Type[0] & (1 << 5)) != 0; } }
+        public bool Private { get { return (Type[1] & (1 << 5)) != 0; } }
+        public bool Reserved { get { return (Type[2] & (1 << 5)) != 0; } }
+        public bool SafeToCopy { get { return (Type[3] & (1 << 5)) != 0; } }
         // End bitshifting magic
 
         public ChunkType(byte[] type)
