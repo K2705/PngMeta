@@ -56,17 +56,22 @@ namespace PngMeta
                 //tbRawViewHex.Text = BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " ");
                 //tbRawViewAscii.Text = ByteUtils.ParseAscii(currentChunk.GetBytes());
                 //if (currentChunk.ParsedData != null)
-                    dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
+                //dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
+
+                tbChunkName.Text = currentChunk.Type.ToString();
+                tbChunkAttribs.Text = currentChunk.Type.Ancillary + " " + currentChunk.Type.Private + " "
+                    + currentChunk.Type.Reserved + " " + currentChunk.Type.SafeToCopy;
+
                 spRawHex.Children.Clear();
-                StringToChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
+                WriteStringChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 spRawAscii.Children.Clear();
-                StringToChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
+                WriteStringChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
 
                 Console.WriteLine(currentChunk.ToString());
             }
         }
 
-        public static void StringToChunks(StackPanel panel, string str, int size)
+        public static void WriteStringChunks(StackPanel panel, string str, int size)
         {
             for (int i = 0; i < str.Length; i += size)
             {
@@ -77,6 +82,17 @@ namespace PngMeta
                 panel.Children.Add(tb);
             }
             //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));
+        }
+
+        public static string SplitStringIntoLines(string str, int size)
+        {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < str.Length; i+= size)
+            {
+                sb.Append(str.Substring(i, Math.Min(size, str.Length - i)).Replace('\n', '⏎'));
+                if (i < str.Length) sb.Append("\n");
+            }
+            return sb.ToString();
         }
 
     }

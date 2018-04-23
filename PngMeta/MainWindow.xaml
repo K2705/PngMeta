@@ -33,8 +33,12 @@
         <!--</StackPanel>-->
         <TabControl Grid.Column="1">
             <TabItem Header="Chunk contents">
+                <StackPanel>
+                    <TextBox x:Name="tbChunkName" />
+                    <TextBox x:Name="tbChunkAttribs" />
+                </StackPanel>
                 <!--<StackPanel x:Name="spChunkContents" Orientation="Vertical" />-->
-                <DataGrid x:Name="dgChunkContents" DataContext="{Binding}" />
+                <!--<DataGrid x:Name="dgChunkContents" DataContext="{Binding}" />-->
             </TabItem>
             <TabItem Header="View raw">
                 <Grid>
