@@ -8,6 +8,7 @@ namespace PngMeta
 {
     public class ChunkType
     {
+        private string strType;
         public byte[] Type { get; private set; }
         // Spooky bitshifting magic to get the fifth bit of each byte
         // Refer to https://www.w3.org/TR/2003/REC-PNG-20031110/#5Chunk-naming-conventions as to why
@@ -45,12 +46,16 @@ namespace PngMeta
 
         public override string ToString()
         {
-            char[] chars = new char[4];
-            for (int i = 0; i < 4; i++)
+            if (strType == null)
             {
-                chars[i] = (char)Type[i];
+                char[] chars = new char[4];
+                for (int i = 0; i < 4; i++)
+                {
+                    chars[i] = (char)Type[i];
+                }
+                strType = new string(chars);
             }
-            return new string(chars);
+            return strType;
         }
 
         public override int GetHashCode()
