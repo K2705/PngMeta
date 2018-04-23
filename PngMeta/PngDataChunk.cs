@@ -100,7 +100,15 @@ namespace PngMeta
 
         public void UpdateCrc()
         {
-            //TODO
+            this.CRC = CalculateCrc();
+        }
+
+        public UInt32 CalculateCrc()
+        {
+            byte[] buffer = new byte[Length + 4];
+            Array.Copy(Type.Type, 0, buffer, 0, 4);
+            Array.Copy(data, 0, buffer, 4, Length);
+            return Crc.GetCRC(buffer);
         }
 
         //public virtual List<KeyValuePair<string, string>> ChunkData()

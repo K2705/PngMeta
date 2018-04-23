@@ -65,6 +65,7 @@
     <Compile Include="blImageData.cs" />
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ChunkType.cs" />
+    <Compile Include="Crc.cs" />
     <Compile Include="ImageWrapper.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
