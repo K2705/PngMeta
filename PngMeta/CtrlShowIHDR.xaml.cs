@@ -32,6 +32,11 @@ namespace PngMeta
             tbWidth.Text = HeaderData.Width.ToString();
             tbHeight.Text = HeaderData.Height.ToString();
             tbBitDepth.Text = HeaderData.BitDepth.ToString();
+            tbColourType.Text = HeaderData.ColourType.ToString();
+            tbCompressionMethod.Text = HeaderData.CompressionMethod.ToString();
+            tbFilterMethod.Text = HeaderData.FilterMethod.ToString();
+            tbInterlaceMethod.Text = HeaderData.InterlaceMethod.ToString();
         }
+        
     }
 }
