@@ -20,9 +20,18 @@ namespace PngMeta
     /// </summary>
     public partial class CtrlShowIHDR : UserControl
     {
+        public ParsedIHDR HeaderData { get; set; }
+
         public CtrlShowIHDR()
         {
             InitializeComponent();
+        }
+
+        public void UpdateView()
+        {
+            tbWidth.Text = HeaderData.Width.ToString();
+            tbHeight.Text = HeaderData.Height.ToString();
+            tbBitDepth.Text = HeaderData.BitDepth.ToString();
         }
     }
 }

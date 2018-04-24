@@ -58,7 +58,6 @@ namespace PngMeta
                 //if (currentChunk.ParsedData != null)
                 //dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
 
-<<<<<<< HEAD
                 //ColumnDefinition column = new ColumnDefinition();
                 //column.MinWidth = 300;
                 //grChunkContents.ColumnDefinitions.Add(column);
@@ -69,32 +68,35 @@ namespace PngMeta
                 //StackPanel spRight = new StackPanel();
                 //grChunkContents.Children.Add(spLeft);
                 //grChunkContents.Children.Add(spRight);
+
+                //tbChunkName.Text = currentChunk.Type.ToString();
+                //tbChunkAttribs.Text = currentChunk.Type.Ancillary + " " + currentChunk.Type.Private + " "
+                //    + currentChunk.Type.Reserved + " " + currentChunk.Type.SafeToCopy;
+
+                switch (currentChunk.Type.ToString())
+                {
+                    case "IHDR":
+                        CtrlShowIHDR headerControl = new CtrlShowIHDR();
+                        headerControl.HeaderData = currentChunk.ParsedData as ParsedIHDR;
+                        headerControl.UpdateView();
+                        tabChunkContents.Content = headerControl;
+                        break;
+
+                    default:
+                        tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };
+                        break;
+                }
                 
 
                 spRawHex.Children.Clear();
                 DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 spRawAscii.Children.Clear();
                 DrawHexView(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
-=======
-                tbChunkName.Text = currentChunk.Type.ToString();
-                tbChunkAttribs.Text = currentChunk.Type.Ancillary + " " + currentChunk.Type.Private + " "
-                    + currentChunk.Type.Reserved + " " + currentChunk.Type.SafeToCopy;
-
-                spRawHex.Children.Clear();
-                WriteStringChunks(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
-                spRawAscii.Children.Clear();
-                WriteStringChunks(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
->>>>>>> 146dadfcdda85f04f2e3e010539ea913566e52f1
-
-                Console.WriteLine(currentChunk.ToString());
+                
             }
         }
 
-<<<<<<< HEAD
         public static void DrawHexView(StackPanel panel, string str, int size)
-=======
-        public static void WriteStringChunks(StackPanel panel, string str, int size)
->>>>>>> 146dadfcdda85f04f2e3e010539ea913566e52f1
         {
             for (int i = 0; i < str.Length; i += size)
             {
