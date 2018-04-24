@@ -13,9 +13,9 @@ namespace PngMeta
 
     public class ParsedIHDR : ParsedChunkData
     {
-        public string Width { get; }
-        public string Height { get; }
-        public string BitDepth { get; }
+        public int Width { get; }
+        public int Height { get; }
+        public byte BitDepth { get; }
         public byte ColourType { get; }
         public byte CompressionMethod { get; }
         public byte FilterMethod { get; }
@@ -24,9 +24,9 @@ namespace PngMeta
 
         public ParsedIHDR(byte[] data)
         {
-            Width = ByteUtils.ToInt32(data, 0).ToString();
-            Height = ByteUtils.ToInt32(data, 4).ToString();
-            BitDepth = data[8].ToString();
+            Width = ByteUtils.ToInt32(data, 0);
+            Height = ByteUtils.ToInt32(data, 4);
+            BitDepth = data[8];
             ColourType = data[9];
             CompressionMethod = data[10];
             FilterMethod = data[11];
@@ -36,9 +36,9 @@ namespace PngMeta
         public override byte[] GetBytes()
         {
             byte[] bytes = new byte[13];
-            ByteUtils.GetBytes(Int32.Parse(Width)).CopyTo(bytes, 0);
-            ByteUtils.GetBytes(Int32.Parse(Height)).CopyTo(bytes, 4);
-            bytes[8] = byte.Parse(BitDepth);
+            ByteUtils.GetBytes(Width).CopyTo(bytes, 0);
+            ByteUtils.GetBytes(Height).CopyTo(bytes, 4);
+            bytes[8] = BitDepth;
             bytes[9] = ColourType;
             bytes[10] = CompressionMethod;
             bytes[11] = FilterMethod;
