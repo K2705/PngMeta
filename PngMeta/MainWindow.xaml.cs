@@ -68,8 +68,7 @@ namespace PngMeta
                 //StackPanel spRight = new StackPanel();
                 //grChunkContents.Children.Add(spLeft);
                 //grChunkContents.Children.Add(spRight);
-
-                tabChunkContents.Content = new CtrlShowIHDR();
+                
 
                 spRawHex.Children.Clear();
                 DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);

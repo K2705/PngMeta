@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PngMeta"
+        xmlns:controls="clr-namespace:PngMeta"
         mc:Ignorable="d"
         Title="MainWindow" Height="420.588" Width="758.333">
 
@@ -33,7 +34,7 @@
         <!--</StackPanel>-->
         <TabControl Grid.Column="1">
             <TabItem Header="Chunk contents" x:Name="tabChunkContents">
-                
+                <controls:CtrlShowIHDR />
                 <!--<Grid x:Name="grChunkContents" />-->
                 <!--<StackPanel x:Name="spChunkContents" Orientation="Vertical" />-->
                 <!--<DataGrid x:Name="dgChunkContents" DataContext="{Binding}" />-->

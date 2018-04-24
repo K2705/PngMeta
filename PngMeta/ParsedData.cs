@@ -89,16 +89,18 @@ namespace PngMeta
             while (i < data.Length)
             {
                 //keyword is supposed to be 1-79 characters but better not assume
-                for (; data[i] != 0x00 && i < data.Length; i++) //until null character or end of array
+                for (; i < data.Length && data[i] != 0x00; i++) //until null character or end of array
                 {
                     sbKey.Append(latin1.GetChars(data, i, 1));
                 }
                 //found null (or data ended prematurely)
+                i++;
                 //data can be any length, including zero
-                for (; data[i] != 0x00 && i < data.Length; i++)
+                for (; i < data.Length && data[i] != 0x00; i++)
                 {
                     sbKey.Append(latin1.GetChars(data, i, 1));
                 }
+                i++;
                 //another null or end of data
                 TextData.Add(new KeyValuePair<string, string>(sbKey.ToString(), sbValue.ToString()));
                 sbKey.Clear();
