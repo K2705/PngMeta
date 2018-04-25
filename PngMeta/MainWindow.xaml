@@ -50,8 +50,12 @@
                         <ColumnDefinition Width="3*" />
                         <ColumnDefinition Width="1*" />
                     </Grid.ColumnDefinitions>
-                    <StackPanel x:Name="spRawHex" Grid.Column="0"/>
-                    <StackPanel x:Name="spRawAscii" Grid.Column="1"/>
+                    <TextBox x:Name="tbRawHex" Grid.Column="0" FontFamily="Consolas" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+                    <TextBox x:Name="tbRawAscii" Grid.Column="1" FontFamily="Consolas" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
+
+                    <!--<StackPanel x:Name="spRawHex" Grid.Column="0"/>
+                    <StackPanel x:Name="spRawAscii" Grid.Column="1"/>-->
+                    
                     <!--<ItemsControl x:Name="tStackHex" Grid.Column="0">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>

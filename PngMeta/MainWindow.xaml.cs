@@ -98,13 +98,15 @@ namespace PngMeta
                         tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };
                         break;
                 }
-                
 
-                spRawHex.Children.Clear();
-                DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
-                spRawAscii.Children.Clear();
-                DrawHexView(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
-                
+                tbRawHex.Text = SplitStringIntoLines(BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
+                tbRawAscii.Text = SplitStringIntoLines(ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
+
+                //spRawHex.Children.Clear();
+                //DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
+                //spRawAscii.Children.Clear();
+                //DrawHexView(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
+
             }
         }
 
