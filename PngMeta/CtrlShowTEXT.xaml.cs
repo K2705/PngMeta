@@ -29,5 +29,12 @@ namespace PngMeta
         {
             dgText.ItemsSource = Data.TextData;
         }
+
+        private void btnNew_Click(object sender, RoutedEventArgs e)
+        {
+            Data.TextData.Add( new StringPair("", ""));
+            dgText.Items.Refresh();
+        }
+
     }
 }

@@ -77,11 +77,11 @@ namespace PngMeta
     public class ParsedTEXT : ParsedChunkData
     {
         private Encoding latin1 = Encoding.GetEncoding("ISO-8859-1"); //Latin-1 charset
-        public List<KeyValuePair<string, string>> TextData { get; set; }
+        public List<StringPair> TextData { get; set; }
 
         public ParsedTEXT(byte[] data)
         {
-            TextData = new List<KeyValuePair<string, string>>();
+            TextData = new List<StringPair>();
             StringBuilder sbKey = new StringBuilder();
             StringBuilder sbValue = new StringBuilder();
 
@@ -102,16 +102,17 @@ namespace PngMeta
                 }
                 i++;
                 //another null or end of data
-                TextData.Add(new KeyValuePair<string, string>(sbKey.ToString(), sbValue.ToString()));
+                TextData.Add(new StringPair(sbKey.ToString(), sbValue.ToString()));
                 sbKey.Clear();
                 sbValue.Clear();
             }
+            
         }
 
         public override byte[] GetBytes()
         {
             List<byte> bytes = new List<byte>();
-            foreach (KeyValuePair<string, string> k in TextData)
+            foreach (StringPair k in TextData)
             {
                 bytes.AddRange(latin1.GetBytes(k.Key));
                 bytes.Add(0x00);
@@ -120,6 +121,18 @@ namespace PngMeta
             }
             bytes.RemoveAt(bytes.Count - 1); // loop adds one extra null byte at the end
             return bytes.ToArray();
+        }
+    }
+
+
+    public class StringPair
+    {
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public StringPair(string key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
         }
     }
 }
