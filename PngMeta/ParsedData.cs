@@ -127,7 +127,37 @@ namespace PngMeta
 
         public ParsedITXT(byte[] data)
         {
-            throw new NotImplementedException();
+            StringBuilder sbKey = new StringBuilder();
+            int i = 0;
+            for (; i < data.Length && data[i] != 0x00; i++) //until null character or end of array
+            {
+                sbKey.Append(textEncoding.GetChars(data, i, 1));
+            }
+            Keyword = sbKey.ToString();
+            i++;
+            Compressed = (data[i] == 1);
+            i++;
+            StringBuilder sbLanguage = new StringBuilder();
+            for (; i < data.Length && data[i] != 0x00; i++)
+            {
+                sbLanguage.Append(textEncoding.GetChars(data, i, 1));
+            }
+            Language = sbLanguage.ToString();
+            i++;
+            StringBuilder sbTranslated = new StringBuilder();
+            for (; i < data.Length && data[i] != 0x00; i++)
+            {
+                sbTranslated.Append(textEncoding.GetChars(data, i, 1));
+            }
+            KeywordTranslated = sbTranslated.ToString();
+            i++;
+            StringBuilder sbText = new StringBuilder();
+            for (; i < data.Length; i++) //not null-terminated
+            {
+                sbText.Append(textEncoding.GetChars(data, i, 1));
+            }
+            Text = sbText.ToString();
+
         }
 
         public override byte[] GetBytes()
