@@ -88,7 +88,11 @@ namespace PngMeta
                         tabChunkContents.Content = gammaControl;
                         break;
                     case "tEXt":
-                        
+                        CtrlShowTEXT textControl = new CtrlShowTEXT();
+                        textControl.Data = currentChunk.ParsedData as ParsedTEXT;
+                        textControl.UpdateView();
+                        tabChunkContents.Content = textControl;
+                        break;
 
                     default:
                         tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };
