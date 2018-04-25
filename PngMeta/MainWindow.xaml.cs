@@ -72,7 +72,7 @@ namespace PngMeta
                 //tbChunkName.Text = currentChunk.Type.ToString();
                 //tbChunkAttribs.Text = currentChunk.Type.Ancillary + " " + currentChunk.Type.Private + " "
                 //    + currentChunk.Type.Reserved + " " + currentChunk.Type.SafeToCopy;
-
+                
                 switch (currentChunk.Type.ToString())
                 {
                     case "IHDR":
@@ -81,6 +81,14 @@ namespace PngMeta
                         headerControl.UpdateView();
                         tabChunkContents.Content = headerControl;
                         break;
+                    case "gAMA":
+                        CtrlShowGAMA gammaControl = new CtrlShowGAMA();
+                        gammaControl.GammaData = currentChunk.ParsedData as ParsedGAMA;
+                        gammaControl.UpdateView();
+                        tabChunkContents.Content = gammaControl;
+                        break;
+                    case "tEXt":
+                        
 
                     default:
                         tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };
