@@ -98,7 +98,7 @@ namespace PngMeta
                 //data can be any length, including zero
                 for (; i < data.Length && data[i] != 0x00; i++)
                 {
-                    sbKey.Append(latin1.GetChars(data, i, 1));
+                    sbValue.Append(latin1.GetChars(data, i, 1));
                 }
                 i++;
                 //another null or end of data
