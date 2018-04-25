@@ -124,6 +124,26 @@ namespace PngMeta
         }
     }
 
+    public class ParsedITXT : ParsedChunkData
+    {
+        private Encoding textEncoding = Encoding.UTF8;
+        public string Keyword { get; set; }
+        public bool Compressed { get; private set; }
+        public string Language { get; set; }
+        public string KeywordTranslated { get; set; }
+        public string Text { get; set; }
+
+        public ParsedITXT(byte[] data)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override byte[] GetBytes()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 
     public class StringPair
     {
