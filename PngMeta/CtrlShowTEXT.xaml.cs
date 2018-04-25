@@ -20,20 +20,9 @@ namespace PngMeta
     /// </summary>
     public partial class CtrlShowTEXT : UserControl
     {
-        public ParsedTEXT Data { get; set; }
         public CtrlShowTEXT()
         {
             InitializeComponent();
-        }
-        public void UpdateView()
-        {
-            dgText.ItemsSource = Data.TextData;
-        }
-
-        private void btnNew_Click(object sender, RoutedEventArgs e)
-        {
-            Data.TextData.Add( new StringPair("", ""));
-            dgText.Items.Refresh();
         }
 
     }

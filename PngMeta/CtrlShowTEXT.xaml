@@ -7,13 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <DataGrid x:Name="dgText" CanUserSortColumns="False" CanUserAddRows="True" Grid.Row="0" />
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <Button x:Name="btnNew" Content="Add entry" Click="btnNew_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <TextBlock Text="Keyword"/>
+            <TextBox x:Name="tbKey" Text="{Binding Key}" Height="auto"/>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1">
+            <TextBlock Text="Value"/>
+            <TextBox x:Name="tbValue" Text="{Binding Value}" Height="auto"/>
         </StackPanel>
     </Grid>
 </UserControl>

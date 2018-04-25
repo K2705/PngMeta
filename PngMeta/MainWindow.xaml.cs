@@ -89,8 +89,7 @@ namespace PngMeta
                         break;
                     case "tEXt":
                         CtrlShowTEXT textControl = new CtrlShowTEXT();
-                        textControl.Data = currentChunk.ParsedData as ParsedTEXT;
-                        textControl.UpdateView();
+                        textControl.DataContext = currentChunk.ParsedData as ParsedTEXT;
                         tabChunkContents.Content = textControl;
                         break;
 
