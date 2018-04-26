@@ -31,6 +31,8 @@ namespace PngMeta
         public byte[] GetImageBuffer()
         {
             List<byte> bytes = new List<byte>();
+            byte[] pngHeader = { 137, 80, 78, 71, 13, 10, 26, 10, };
+            bytes.AddRange(pngHeader);
             foreach (PngDataChunk chunk in FileChunks)
             {
                 bytes.AddRange(chunk.GetBytes());

@@ -31,16 +31,16 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="btnAdd" Content="Add chunk" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="2"/>
+            <Button x:Name="btnAdd" Content="Add chunk" IsEnabled="False" Margin="12,0,12,1" HorizontalAlignment="Center" Width="76" Grid.Row="2" Height="21" VerticalAlignment="Bottom" Click="btnAdd_Click"/>
             <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="btnOpen_Click" Grid.Row="3"/>
-            <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
+            <Button x:Name="btnSave" Content="Save"  Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
         </Grid>
         <!--</StackPanel>-->
         <TabControl Grid.Column="1">
             <TabItem Header="Chunk contents" x:Name="tabChunkContents">
                 <!--<controls:CtrlShowIHDR x:Name="ctrlHeader"/>-->
                 <!--<Grid x:Name="grChunkContents" />-->
-            <!--<TabItem Header="Chunk contents">-->
+                <!--<TabItem Header="Chunk contents">-->
                 <!--<StackPanel>
                     <TextBox x:Name="tbChunkName" />
                     <TextBox x:Name="tbChunkAttribs" />
@@ -59,7 +59,7 @@
 
                     <!--<StackPanel x:Name="spRawHex" Grid.Column="0"/>
                     <StackPanel x:Name="spRawAscii" Grid.Column="1"/>-->
-                    
+
                     <!--<ItemsControl x:Name="tStackHex" Grid.Column="0">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>

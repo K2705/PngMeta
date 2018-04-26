@@ -86,6 +86,10 @@ namespace PngMeta
 
         public byte[] GetBytes()
         {
+            UpdateData();
+            UpdateLength();
+            UpdateCrc();
+
             byte[] bytes = new byte[Length + 12];
             Array.Copy(ByteUtils.GetBytes(Length), 0, bytes, 0, 4);
             Array.Copy(Type.Type, 0, bytes, 4, 4);
@@ -95,6 +99,13 @@ namespace PngMeta
             return bytes;
         }
 
+        public void UpdateData()
+        {
+            if (ParsedData != null)
+            {
+                data = ParsedData.GetBytes();
+            }
+        }
 
         public void UpdateLength()
         {

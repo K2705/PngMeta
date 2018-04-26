@@ -147,8 +147,19 @@ namespace PngMeta
             }
             else
             {
-                MessageBox.Show("buffer has been modified");
+                Microsoft.Win32.SaveFileDialog dialog = new Microsoft.Win32.SaveFileDialog();
+                dialog.Filter = "PNG images|*.png";
+                if (dialog.ShowDialog() == true)
+                {
+                    File.WriteAllBytes(dialog.FileName, newBuffer);
+                }
             }
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+            //TODO
         }
     }
 }

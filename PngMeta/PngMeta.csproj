@@ -80,7 +80,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="blImageData.cs" />
+    <Compile Include="ImageData.cs" />
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ChunkType.cs" />
     <Compile Include="CtrlShowIHDR.xaml.cs">
