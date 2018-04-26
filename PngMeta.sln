@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{3907FE8F-9C20-4BC1-A7D4-AD1D3C40D814}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HexTest", "HexTest\HexTest.csproj", "{12FD5D88-AE0A-453B-A291-36A268C53203}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PngMeta", "PngMeta\PngMeta.csproj", "{3C46D124-F68B-4C96-ABF1-628598288A03}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCrcTest", "ConsoleCrcTest\ConsoleCrcTest.csproj", "{F3604908-32C9-4B1C-A738-469FBEF5893B}"
@@ -17,14 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3907FE8F-9C20-4BC1-A7D4-AD1D3C40D814}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3907FE8F-9C20-4BC1-A7D4-AD1D3C40D814}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3907FE8F-9C20-4BC1-A7D4-AD1D3C40D814}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3907FE8F-9C20-4BC1-A7D4-AD1D3C40D814}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12FD5D88-AE0A-453B-A291-36A268C53203}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12FD5D88-AE0A-453B-A291-36A268C53203}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12FD5D88-AE0A-453B-A291-36A268C53203}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12FD5D88-AE0A-453B-A291-36A268C53203}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3C46D124-F68B-4C96-ABF1-628598288A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3C46D124-F68B-4C96-ABF1-628598288A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C46D124-F68B-4C96-ABF1-628598288A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
