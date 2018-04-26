@@ -20,6 +20,8 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <TextBlock x:Name="uiChunkListTitle" Text="No image loaded" Grid.Row="0"/>
             <ListBox x:Name="uiChunkList" Width="100" Height="300" SelectionChanged="uiChunkList_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
@@ -29,7 +31,9 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Content="Open" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="Button_Click" Grid.Row="2"/>
+            <Button x:Name="btnAdd" Content="Add chunk" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="2"/>
+            <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="btnOpen_Click" Grid.Row="3"/>
+            <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4"/>
         </Grid>
         <!--</StackPanel>-->
         <TabControl Grid.Column="1">
