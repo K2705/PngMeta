@@ -14,7 +14,7 @@ namespace PngMeta
         public Uri FilePath { get; private set; }
         public BitmapImage Image { get; private set; }
 
-        private byte[] FileBytes { get; set; }
+        public byte[] FileBytes { get; private set; }
 
         /// <summary>
         /// Load a new image 
@@ -26,6 +26,16 @@ namespace PngMeta
             Image = new BitmapImage(FilePath);
             FileBytes = File.ReadAllBytes(path);
             FileChunks = ImageData.GetChunks(FileBytes);
+        }
+        
+        public byte[] GetImageBuffer()
+        {
+            List<byte> bytes = new List<byte>();
+            foreach (PngDataChunk chunk in FileChunks)
+            {
+                bytes.AddRange(chunk.GetBytes());
+            }
+            return bytes.ToArray();
         }
 
     }

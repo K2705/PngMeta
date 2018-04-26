@@ -45,7 +45,7 @@ namespace PngMeta
                 uiChunkList.ItemsSource = imageWrapper.FileChunks;
                 uiChunkListTitle.Text = imageWrapper.FileChunks.Count + " chunks read";
             }
-
+            
         }
 
         private void uiChunkList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -114,18 +114,18 @@ namespace PngMeta
             }
         }
 
-        public static void DrawHexView(StackPanel panel, string str, int size)
-        {
-            for (int i = 0; i < str.Length; i += size)
-            {
-                TextBox tb = new TextBox();
-                tb.IsReadOnly = true;
-                tb.FontFamily = new FontFamily("Consolas");
-                tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
-                panel.Children.Add(tb);
-            }
-            //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));
-        }
+        //public static void DrawHexView(StackPanel panel, string str, int size)
+        //{
+        //    for (int i = 0; i < str.Length; i += size)
+        //    {
+        //        TextBox tb = new TextBox();
+        //        tb.IsReadOnly = true;
+        //        tb.FontFamily = new FontFamily("Consolas");
+        //        tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
+        //        panel.Children.Add(tb);
+        //    }
+        //    //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));
+        //}
 
         public static string SplitStringIntoLines(string str, int size)
         {
@@ -138,5 +138,17 @@ namespace PngMeta
             return sb.ToString();
         }
 
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] newBuffer = imageWrapper.GetImageBuffer();
+            if (imageWrapper.FileBytes.SequenceEqual(newBuffer))
+            {
+                MessageBox.Show("buffer has not been modified");
+            }
+            else
+            {
+                MessageBox.Show("buffer has been modified");
+            }
+        }
     }
 }
