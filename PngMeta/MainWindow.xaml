@@ -33,7 +33,7 @@
             </ListBox>
             <Button x:Name="btnAdd" Content="Add chunk" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="2"/>
             <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="btnOpen_Click" Grid.Row="3"/>
-            <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
+            <Button x:Name="btnSave" Content="Save"  Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
         </Grid>
         <!--</StackPanel>-->
         <TabControl Grid.Column="1">
