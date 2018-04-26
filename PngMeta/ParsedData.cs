@@ -162,7 +162,17 @@ namespace PngMeta
 
         public override byte[] GetBytes()
         {
-            throw new NotImplementedException();
+            List<byte> bytes = new List<byte>();
+            bytes.AddRange(textEncoding.GetBytes(Keyword));
+            bytes.Add(0x00);
+            bytes.Add(Compressed ? (byte)1 : (byte)0);
+            bytes.Add(0x00); //This is the compression method, but always zero in the spec we're supporting
+            bytes.AddRange(textEncoding.GetBytes(Language));
+            bytes.Add(0x00);
+            bytes.AddRange(textEncoding.GetBytes(KeywordTranslated));
+            bytes.Add(0x00);
+            bytes.AddRange(textEncoding.GetBytes(Text));
+            return bytes.ToArray();
         }
     }
 
