@@ -92,6 +92,11 @@ namespace PngMeta
                         textControl.DataContext = currentChunk.ParsedData as ParsedTEXT;
                         tabChunkContents.Content = textControl;
                         break;
+                    case "iTXt":
+                        CtrlShowITXT itextControl = new CtrlShowITXT();
+                        itextControl.DataContext = currentChunk.ParsedData as ParsedITXT;
+                        tabChunkContents.Content = itextControl;
+                        break;
 
                     default:
                         tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };

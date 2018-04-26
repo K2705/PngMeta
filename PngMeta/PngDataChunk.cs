@@ -56,6 +56,9 @@ namespace PngMeta
                 case "tEXt":
                     ParsedData = new ParsedTEXT(data);
                     break;
+                case "iTXt":
+                    ParsedData = new ParsedITXT(data);
+                    break;
                 default:
                     break;
             }

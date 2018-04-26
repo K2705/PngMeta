@@ -57,6 +57,9 @@
     <Compile Include="CtrlShowGAMA.xaml.cs">
       <DependentUpon>CtrlShowGAMA.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CtrlShowITXT.xaml.cs">
+      <DependentUpon>CtrlShowITXT.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CtrlShowTEXT.xaml.cs">
       <DependentUpon>CtrlShowTEXT.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Compile Include="StringUtils.cs" />
+    <Page Include="CtrlShowITXT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
