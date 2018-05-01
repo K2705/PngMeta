@@ -137,6 +137,7 @@ namespace PngMeta
             i++;
             Compressed = (data[i] == 1);
             i++;
+            i++; //compression method byte, not used
             StringBuilder sbLanguage = new StringBuilder();
             for (; i < data.Length && data[i] != 0x00; i++)
             {
