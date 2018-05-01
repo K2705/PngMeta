@@ -122,7 +122,14 @@ namespace PngMeta
                 dialog.Filter = "PNG images|*.png";
                 if (dialog.ShowDialog() == true)
                 {
-                    File.WriteAllBytes(dialog.FileName, newBuffer);
+                    try
+                    {
+                        File.WriteAllBytes(dialog.FileName, newBuffer);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error saving image:\n" + ex.Message);
+                    }
                 }
             }
         }
