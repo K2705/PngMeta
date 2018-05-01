@@ -67,8 +67,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="CtrlShowTIME.xaml.cs">
+      <DependentUpon>CtrlShowTIME.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringUtils.cs" />
     <Page Include="CtrlShowITXT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CtrlShowTIME.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

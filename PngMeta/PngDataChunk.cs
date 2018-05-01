@@ -66,6 +66,9 @@ namespace PngMeta
                 case "iTXt":
                     ParsedData = new ParsedITXT(data);
                     break;
+                case "tIME":
+                    ParsedData = new ParsedTIME(data);
+                    break;
                 default:
                     break;
             }

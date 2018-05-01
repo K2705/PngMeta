@@ -51,7 +51,9 @@ namespace PngMeta
                 
                 uiPreviewImage.Source = imageWrapper.Image;
                 uiChunkList.ItemsSource = imageWrapper.FileChunks;
+                btnSave.IsEnabled = true;
                 uiChunkListTitle.Text = imageWrapper.FileChunks.Count + " chunks read";
+                tabChunkContents.Content = null;
             }
             
         }
@@ -85,6 +87,11 @@ namespace PngMeta
                         CtrlShowITXT itextControl = new CtrlShowITXT();
                         itextControl.DataContext = currentChunk.ParsedData as ParsedITXT;
                         tabChunkContents.Content = itextControl;
+                        break;
+                    case "tIME":
+                        CtrlShowTIME timeControl = new CtrlShowTIME();
+                        timeControl.DataContext = currentChunk.ParsedData as ParsedTIME;
+                        tabChunkContents.Content = timeControl;
                         break;
 
                     default:
@@ -124,7 +131,7 @@ namespace PngMeta
                 {
                     try
                     {
-                        File.WriteAllBytes(dialog.FileName, newBuffer);
+                        imageWrapper.SaveImage(dialog.FileName, newBuffer);
                     }
                     catch (Exception ex)
                     {

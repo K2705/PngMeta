@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
+    /// <summary>
+    /// image metadata in a human-readable format
+    /// </summary>
     public abstract class ParsedChunkData
     {
         public abstract byte[] GetBytes();
     }
 
+    /// <summary>
+    /// Image header
+    /// </summary>
     public class ParsedIHDR : ParsedChunkData
     {
         public int Width { get; }
@@ -47,7 +53,7 @@ namespace PngMeta
             return bytes;
         }
     }
-
+    
     public class ParsedGAMA : ParsedChunkData
     {
         private UInt32 gamma;
@@ -74,6 +80,9 @@ namespace PngMeta
         }
     }
 
+    /// <summary>
+    /// Text data (English-only)
+    /// </summary>
     public class ParsedTEXT : ParsedChunkData
     {
         private Encoding latin1 = Encoding.GetEncoding("ISO-8859-1"); //Latin-1 charset
@@ -116,6 +125,9 @@ namespace PngMeta
         }
     }
 
+    /// <summary>
+    /// Text data (any language)
+    /// </summary>
     public class ParsedITXT : ParsedChunkData
     {
         private Encoding textEncoding = Encoding.UTF8;
@@ -173,6 +185,107 @@ namespace PngMeta
             bytes.AddRange(textEncoding.GetBytes(KeywordTranslated));
             bytes.Add(0x00);
             bytes.AddRange(textEncoding.GetBytes(Text));
+            return bytes.ToArray();
+        }
+    }
+
+    /// <summary>
+    /// Image last-modified time
+    /// </summary>
+    public class ParsedTIME : ParsedChunkData
+    {
+        private int year;
+        private int month;
+        private int day;
+        private int hour;
+        private int minute;
+        private int second;
+
+        public int Year
+        {
+            get { return year; }
+            set { year = value; }
+        }
+        public int Month
+        {
+            get { return month; }
+            set
+            {
+                if (value >= 1 && value <= 12)
+                    month = value;
+            }
+        }
+        public int Day
+        {
+            get { return day; }
+            set
+            {
+                if (value >= 1 && value <= 31) // spec doesn't care about the number of days in each month
+                    day = value;
+            }
+        }
+        public int Hour
+        {
+            get { return hour; }
+            set
+            {
+                if (value >= 0 && value <= 23)
+                    hour = value;
+            }
+        }
+        public int Minute
+        {
+            get { return minute; }
+            set
+            {
+                if (value >= 0 && value <= 59)
+                    minute = value;
+            }
+        }
+        public int Second
+        {
+            get { return second; }
+            set
+            {
+                if (value >= 0 && value <= 60)
+                    second = value;
+            }
+        }
+
+        public DateTime Time
+        {
+            get { return new DateTime(Year, Month, Day, Hour, Minute, Second); }
+            set
+            {
+                Year = value.Year;
+                Month = value.Month;
+                Day = value.Day;
+                Hour = value.Hour;
+                Minute = value.Minute;
+                Second = value.Second;
+            }
+        }
+
+        public ParsedTIME(byte[] buffer)
+        {
+            year = ByteUtils.IntFromTwoBytes(buffer, 0);
+            month = (int)buffer[2];
+            day = (int)buffer[3];
+            hour = (int)buffer[4];
+            minute = (int)buffer[5];
+            second = (int)buffer[6];
+
+        }
+
+        public override byte[] GetBytes()
+        {
+            List<byte> bytes = new List<byte>();
+            bytes.AddRange(ByteUtils.TwoBytesFromInt(year));
+            bytes.Add((byte)month);
+            bytes.Add((byte)day);
+            bytes.Add((byte)hour);
+            bytes.Add((byte)minute);
+            bytes.Add((byte)second);
             return bytes.ToArray();
         }
     }
