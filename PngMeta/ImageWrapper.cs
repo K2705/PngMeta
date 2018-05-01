@@ -23,13 +23,14 @@ namespace PngMeta
         public void LoadImage(string path)
         {
             FilePath = new Uri(path);
-            Image = new BitmapImage(FilePath);
-            using (FileStream stream = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            Image = new BitmapImage();
             {
-                int length = (int)stream.Length;
-                FileBytes = new byte[length];
-                stream.Read(FileBytes, 0, length);
+                Image.BeginInit();
+                Image.CacheOption = BitmapCacheOption.OnLoad;
+                Image.UriSource = FilePath;
+                Image.EndInit();
             }
+            FileBytes = File.ReadAllBytes(path);
             FileChunks = ImageData.GetChunks(FileBytes);
         }
         
@@ -47,10 +48,7 @@ namespace PngMeta
 
         internal void SaveImage(string path, byte[] buffer)
         {
-            using (FileStream stream = File.Open(path, FileMode.OpenOrCreate, FileAccess.Write))
-            {
-                stream.Write(buffer, 0, buffer.Length);
-            }
+            File.WriteAllBytes(path, buffer);
         }
     }
 }
