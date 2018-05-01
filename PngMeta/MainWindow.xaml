@@ -27,7 +27,7 @@
             <ListBox x:Name="uiChunkList" Width="100" Height="300" SelectionChanged="uiChunkList_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Type}" />
+                        <TextBlock Text="{Binding Type}" ToolTipService.ToolTip="{Binding Description}" ToolTipService.InitialShowDelay="0"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
@@ -35,18 +35,10 @@
             <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="btnOpen_Click" Grid.Row="3"/>
             <Button x:Name="btnSave" Content="Save"  Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
         </Grid>
-        <!--</StackPanel>-->
+
         <TabControl Grid.Column="1">
             <TabItem Header="Chunk contents" x:Name="tabChunkContents">
-                <!--<controls:CtrlShowIHDR x:Name="ctrlHeader"/>-->
-                <!--<Grid x:Name="grChunkContents" />-->
-                <!--<TabItem Header="Chunk contents">-->
-                <!--<StackPanel>
-                    <TextBox x:Name="tbChunkName" />
-                    <TextBox x:Name="tbChunkAttribs" />
-                </StackPanel>-->
-                <!--<StackPanel x:Name="spChunkContents" Orientation="Vertical" />-->
-                <!--<DataGrid x:Name="dgChunkContents" DataContext="{Binding}" />-->
+                
             </TabItem>
             <TabItem Header="View raw">
                 <Grid>
@@ -57,35 +49,6 @@
                     <TextBox x:Name="tbRawHex" Grid.Column="0" FontFamily="Consolas" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
                     <TextBox x:Name="tbRawAscii" Grid.Column="1" FontFamily="Consolas" IsReadOnly="True" VerticalScrollBarVisibility="Auto"/>
 
-                    <!--<StackPanel x:Name="spRawHex" Grid.Column="0"/>
-                    <StackPanel x:Name="spRawAscii" Grid.Column="1"/>-->
-
-                    <!--<ItemsControl x:Name="tStackHex" Grid.Column="0">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBox/>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                            <ItemsControl x:Name="tStackAscii" Grid.Column="1">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Vertical" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBox />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>-->
-                    <!--<TextBox x:Name="tbRawViewHex" TextWrapping="Wrap" FontFamily="Consolas" />
-                            <TextBox x:Name="tbRawViewAscii" TextWrapping="Wrap" FontFamily="Consolas" Grid.Column="1" />-->
                 </Grid>
             </TabItem>
         </TabControl>

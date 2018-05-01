@@ -38,7 +38,15 @@ namespace PngMeta
             Nullable<bool> result = dialog.ShowDialog();
             if (result == true)
             {
-                imageWrapper.LoadImage(dialog.FileName);
+                try
+                {
+                    imageWrapper.LoadImage(dialog.FileName);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not load image:\n" + ex.Message);
+                    return;
+                }
                 // TODO: deal w/ exception
                 
                 uiPreviewImage.Source = imageWrapper.Image;
@@ -53,25 +61,6 @@ namespace PngMeta
             PngDataChunk currentChunk = uiChunkList.SelectedItem as PngDataChunk;
             if (currentChunk != null)
             {
-                //tbRawViewHex.Text = BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " ");
-                //tbRawViewAscii.Text = ByteUtils.ParseAscii(currentChunk.GetBytes());
-                //if (currentChunk.ParsedData != null)
-                //dgChunkContents.ItemsSource = currentChunk.ParsedData.DataList;
-
-                //ColumnDefinition column = new ColumnDefinition();
-                //column.MinWidth = 300;
-                //grChunkContents.ColumnDefinitions.Add(column);
-                //column = new ColumnDefinition();
-                //column.MinWidth = 100;
-                //grChunkContents.ColumnDefinitions.Add(column);
-                //StackPanel spLeft = new StackPanel();
-                //StackPanel spRight = new StackPanel();
-                //grChunkContents.Children.Add(spLeft);
-                //grChunkContents.Children.Add(spRight);
-
-                //tbChunkName.Text = currentChunk.Type.ToString();
-                //tbChunkAttribs.Text = currentChunk.Type.Ancillary + " " + currentChunk.Type.Private + " "
-                //    + currentChunk.Type.Reserved + " " + currentChunk.Type.SafeToCopy;
                 
                 switch (currentChunk.Type.ToString())
                 {
@@ -99,33 +88,15 @@ namespace PngMeta
                         break;
 
                     default:
-                        tabChunkContents.Content = new TextBlock { Text = "Data cannot be read." };
+                        tabChunkContents.Content = new TextBlock { Text = "Data cannot be displayed." };
                         break;
                 }
 
                 tbRawHex.Text = SplitStringIntoLines(BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 tbRawAscii.Text = SplitStringIntoLines(ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
 
-                //spRawHex.Children.Clear();
-                //DrawHexView(spRawHex, BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
-                //spRawAscii.Children.Clear();
-                //DrawHexView(spRawAscii, ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
-
             }
         }
-
-        //public static void DrawHexView(StackPanel panel, string str, int size)
-        //{
-        //    for (int i = 0; i < str.Length; i += size)
-        //    {
-        //        TextBox tb = new TextBox();
-        //        tb.IsReadOnly = true;
-        //        tb.FontFamily = new FontFamily("Consolas");
-        //        tb.Text = str.Substring(i, Math.Min(size, str.Length - i));
-        //        panel.Children.Add(tb);
-        //    }
-        //    //ret.Add(str.Substring(i, Math.Min(size, str.Length - i)));
-        //}
 
         public static string SplitStringIntoLines(string str, int size)
         {
@@ -161,5 +132,6 @@ namespace PngMeta
             throw new NotImplementedException();
             //TODO
         }
+
     }
 }

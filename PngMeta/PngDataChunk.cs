@@ -24,6 +24,13 @@ namespace PngMeta
         }
         public UInt32 CRC { get; private set; }
         public ParsedChunkData ParsedData { get; set; }
+        public string Description
+        {
+            get
+            {
+                return Type.Description();
+            }
+        }
         
 
         public PngDataChunk()
