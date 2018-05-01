@@ -66,5 +66,20 @@ namespace PngMeta
             }
             return sb.ToString();
         }
+
+        public static int IntFromTwoBytes(byte[] buffer, int index)
+        {
+            int value = buffer[index++] << 8 | buffer[index++];
+            return value;
+        }
+
+        public static byte[] TwoBytesFromInt(int number)
+        {
+            byte[] bytes = new byte[2];
+            bytes[0] = (byte)(number >> 8);
+            bytes[1] = (byte)number;
+            return bytes;
+        }
+
     }
 }
