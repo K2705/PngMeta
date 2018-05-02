@@ -24,5 +24,19 @@ namespace PngMeta
         {
             InitializeComponent();
         }
+
+        private void tbKeyword_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (tbKeyword.Text.Length > 0)
+                btnSave.IsEnabled = true;
+            else
+                btnSave.IsEnabled = false;
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            Image.FileChunks.Insert(Image.FileChunks.Count - 2, ImageData.NewTextChunk(tbKeyword.Text, tbValue.Text)); // must be before IEND
+            this.Close();
+        }
     }
 }

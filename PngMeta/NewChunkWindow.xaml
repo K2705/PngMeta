@@ -7,7 +7,24 @@
         mc:Ignorable="d"
         Title="Add text comment" Height="450" Width="800">
     <Grid>
-        <ComboBox x:Name="cbChunkTypes" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
-
+        <StackPanel Orientation="Vertical" Margin="30">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbKeyword" MaxLength="79" Margin="5" Grid.Column="0" TextChanged="tbKeyword_TextChanged"/>
+                <TextBlock Text="A keyword describing the saved text (1-79 characters)" Grid.Column="1"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="tbValue" Height="200" Margin="5" VerticalScrollBarVisibility="Auto" Grid.Column="0"/>
+                <TextBlock Text="Saved text" Grid.Column="1"/>
+            </Grid>
+            <Button x:Name="btnSave" Content="Save" Margin="10" Width="100" HorizontalAlignment="Center" IsEnabled="False" Click="btnSave_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

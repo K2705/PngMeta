@@ -70,6 +70,7 @@
     <Compile Include="CtrlShowTIME.xaml.cs">
       <DependentUpon>CtrlShowTIME.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ImageData.cs" />
     <Compile Include="NewChunkWindow.xaml.cs">
       <DependentUpon>NewChunkWindow.xaml</DependentUpon>
     </Compile>

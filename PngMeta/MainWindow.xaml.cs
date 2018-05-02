@@ -49,6 +49,7 @@ namespace PngMeta
                 uiPreviewImage.Source = imageWrapper.Image;
                 uiChunkList.ItemsSource = imageWrapper.FileChunks;
                 btnSave.IsEnabled = true;
+                btnAdd.IsEnabled = true;
                 uiChunkListTitle.Text = imageWrapper.FileChunks.Count + " chunks read";
                 tabChunkContents.Content = null;
             }
@@ -142,11 +143,21 @@ namespace PngMeta
         {
             NewChunkWindow window = new NewChunkWindow();
             window.Image = imageWrapper;
+            window.ShowDialog();
+            uiChunkList.Items.Refresh();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //TODO not implemented
+            PngDataChunk selectedChunk = uiChunkList.SelectedItem as PngDataChunk;
+            if (selectedChunk != null && selectedChunk.Type.Ancillary)
+            {
+                imageWrapper.FileChunks.Remove(selectedChunk);
+            }
+            else
+            {
+                MessageBox.Show("Cannot remove " + selectedChunk.TypeString() + ", as it is a critical chunk.");
+            }
         }
     }
 }
