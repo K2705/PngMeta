@@ -48,6 +48,25 @@ namespace PngMeta
             ParseData();
         }
 
+
+        public PngDataChunk(UInt32 length, ChunkType type, byte[] data, UInt32 CRC)
+        {
+            if (data.Length != length)
+            {
+                throw new ArgumentOutOfRangeException("data", "field length mismatch");
+            }
+
+            this.Length = length;
+            this.Type = type;
+            this.data = data;
+            this.CRC = CRC;
+
+            ParseData();
+        }
+
+        /// <summary>
+        /// Parse data into human-readable format, if possible
+        /// </summary>
         private void ParseData()
         {
             switch (Type.ToString())
@@ -72,26 +91,19 @@ namespace PngMeta
             }
         }
 
-        public PngDataChunk(UInt32 length, ChunkType type, byte[] data, UInt32 CRC)
-        {
-            if (data.Length != length)
-            {
-                throw new ArgumentOutOfRangeException("data", "field length mismatch");
-            }
-
-            this.Length = length;
-            this.Type = type;
-            this.data = data;
-            this.CRC = CRC;
-
-            ParseData();
-        }
-
+        /// <summary>
+        /// return chunk type as string
+        /// </summary>
+        /// <returns>chunk type as string</returns>
         public string TypeString()
         {
             return Type.ToString();
         }
 
+        /// <summary>
+        /// Return chunk as a byte array
+        /// </summary>
+        /// <returns>whole data chunk, as byte array</returns>
         public byte[] GetBytes()
         {
             UpdateData();
@@ -107,6 +119,9 @@ namespace PngMeta
             return bytes;
         }
 
+        /// <summary>
+        /// Get data parsed from the chunk data field, if any, and store it back into a byte array.
+        /// </summary>
         public void UpdateData()
         {
             if (ParsedData != null)
@@ -115,16 +130,27 @@ namespace PngMeta
             }
         }
 
+        /// <summary>
+        /// Update lenght field to reflect the actual length of the data field.
+        /// </summary>
         public void UpdateLength()
         {
             Length = (uint)data.Length;
         }
 
+        /// <summary>
+        /// Update cyclic redundancy checksum to reflect actual stored data
+        /// </summary>
         public void UpdateCrc()
         {
             this.CRC = CalculateCrc();
         }
 
+        /// <summary>
+        /// Calculate this chunk's cyclic redundancy checksum.
+        /// As per spec, checksum is calculated from the type and data fields.
+        /// </summary>
+        /// <returns>CRC, as 32-bit unsigned integer</returns>
         public UInt32 CalculateCrc()
         {
             byte[] buffer = new byte[Length + 4];
@@ -132,14 +158,7 @@ namespace PngMeta
             Array.Copy(data, 0, buffer, 4, Length);
             return Crc.GetCRC(buffer);
         }
-
-        //public virtual List<KeyValuePair<string, string>> ChunkData()
-        //{
-        //    List<KeyValuePair<string, string>> ret = new List<KeyValuePair<string, string>>();
-        //    ret.Add(new KeyValuePair<string, string>(Type.ToString(), "Cannot display chunk contents."));
-        //    return ret;
-        //}
-        
+       
 
         public override string ToString()
         {

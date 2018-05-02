@@ -54,6 +54,9 @@ namespace PngMeta
         }
     }
     
+    /// <summary>
+    /// Image gamma
+    /// </summary>
     public class ParsedGAMA : ParsedChunkData
     {
         private UInt32 gamma;
