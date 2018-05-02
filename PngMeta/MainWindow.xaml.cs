@@ -100,7 +100,9 @@ namespace PngMeta
                 tbRawHex.Text = SplitStringIntoLines(BitConverter.ToString(currentChunk.GetBytes()).Replace("-", " "), 24);
                 tbRawAscii.Text = SplitStringIntoLines(ByteUtils.ParseAscii(currentChunk.GetBytes()), 8);
 
+                btnDelete.IsEnabled = true;
             }
+            else btnDelete.IsEnabled = false;
         }
 
         public static string SplitStringIntoLines(string str, int size)
@@ -152,7 +154,12 @@ namespace PngMeta
             PngDataChunk selectedChunk = uiChunkList.SelectedItem as PngDataChunk;
             if (selectedChunk != null && selectedChunk.Type.Ancillary)
             {
-                imageWrapper.FileChunks.Remove(selectedChunk);
+                MessageBoxResult result = MessageBox.Show("Are you sure you want to permanently delete chunk " + selectedChunk.TypeString() + "?", "", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    imageWrapper.FileChunks.Remove(selectedChunk);
+                    uiChunkList.Items.Refresh();
+                }
             }
             else
             {
