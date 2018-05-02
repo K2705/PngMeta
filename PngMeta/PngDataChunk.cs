@@ -196,6 +196,18 @@ namespace PngMeta
 
             return ret.ToString();
         }
+
+        /// <summary>
+        /// Returns whether this PngDataChunk is the same as another PngDataChunk, based on the CRC checksum.
+        /// </summary>
+        /// <param name="obj">object</param>
+        /// <returns>true if this == object, false otherwise</returns>
+        public override bool Equals(object obj)
+        {
+            PngDataChunk chunk = obj as PngDataChunk;
+            if (obj == null) return false;
+            return CalculateCrc() == chunk.CalculateCrc();
+        }
     }
 
 }
