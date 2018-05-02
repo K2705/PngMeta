@@ -21,8 +21,6 @@ namespace PngMeta
     /// </summary>
     public partial class MainWindow : Window
     {
-        //byte[] fileBytes;
-        //List<PngDataChunk> fileChunks;
         ImageWrapper imageWrapper = new ImageWrapper();
 
         public MainWindow()
@@ -42,12 +40,11 @@ namespace PngMeta
                 {
                     imageWrapper.LoadImage(dialog.FileName);
                 }
-                catch (Exception ex)
-                {
+                catch (Exception ex)    // Expected causes of exception: File doesn't exist, no permissions to read file, file otherwise inaccessible,
+                {                       // something wonky happened while reading it, is not a png image, is a png image but corrupted and/or broken
                     MessageBox.Show("Could not load image:\n" + ex.Message);
                     return;
                 }
-                // TODO: deal w/ exception
                 
                 uiPreviewImage.Source = imageWrapper.Image;
                 uiChunkList.ItemsSource = imageWrapper.FileChunks;
