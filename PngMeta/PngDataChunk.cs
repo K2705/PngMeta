@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
+    /// <summary>
+    /// A single PNG data chunk
+    /// </summary>
     public class PngDataChunk
     {
         private byte[] data;
@@ -30,11 +33,6 @@ namespace PngMeta
             {
                 return Type.Description();
             }
-        }
-        
-
-        public PngDataChunk()
-        {
         }
 
         public PngDataChunk(byte[] chunkBytes)
