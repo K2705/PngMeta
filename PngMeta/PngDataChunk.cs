@@ -35,6 +35,11 @@ namespace PngMeta
             }
         }
 
+        public PngDataChunk(ChunkType type)
+        {
+            this.Type = type;
+        }
+
         public PngDataChunk(byte[] chunkBytes)
         {
             Length = ByteUtils.ToUInt32(chunkBytes, 0);
@@ -61,6 +66,15 @@ namespace PngMeta
             this.data = data;
             this.CRC = CRC;
 
+            ParseData();
+        }
+
+        public PngDataChunk(ChunkType type, byte[] data)
+        {
+            this.Type = type;
+            this.data = data;
+            UpdateLength();
+            UpdateCrc();
             ParseData();
         }
 
