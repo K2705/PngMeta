@@ -140,9 +140,13 @@ namespace PngMeta
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
-            //TODO
+            NewChunkWindow window = new NewChunkWindow();
+            window.Image = imageWrapper;
         }
 
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO not implemented
+        }
     }
 }

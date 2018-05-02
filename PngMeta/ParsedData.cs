@@ -118,6 +118,12 @@ namespace PngMeta
 
         }
 
+        public ParsedTEXT(string key, string value)
+        {
+            this.Key = key;
+            this.Value = value;
+        }
+
         public override byte[] GetBytes()
         {
             List<byte> bytes = new List<byte>();
@@ -174,6 +180,15 @@ namespace PngMeta
             }
             Text = sbText.ToString();
 
+        }
+
+        public ParsedITXT(string keyword, bool compressed, string language, string keywordTranslated, string text)
+        {
+            this.Keyword = keyword;
+            this.Compressed = compressed;
+            this.Language = language;
+            this.KeywordTranslated = keywordTranslated;
+            this.Text = text;
         }
 
         public override byte[] GetBytes()

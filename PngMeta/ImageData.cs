@@ -48,5 +48,27 @@ namespace PngMeta
             return chunks;
         }
 
+        public static PngDataChunk NewTextChunk(string keyword, string text)
+        {
+            ParsedTEXT data = new ParsedTEXT(keyword, text);
+            PngDataChunk chunk = new PngDataChunk(new ChunkType("tEXt"));
+            chunk.ParsedData = data;
+            chunk.UpdateData();
+            chunk.UpdateLength();
+            chunk.UpdateCrc();
+            return chunk;
+        }
+
+        public static PngDataChunk NewItxtChunk(string keyword, bool compressed, string language, string translatedKeyword, string text)
+        {
+            ParsedITXT data = new ParsedITXT(keyword, compressed, language, translatedKeyword, text);
+            PngDataChunk chunk = new PngDataChunk(new ChunkType("iTXt"));
+            chunk.ParsedData = data;
+            chunk.UpdateData();
+            chunk.UpdateLength();
+            chunk.UpdateLength();
+            return chunk;
+        }
+
     }
 }

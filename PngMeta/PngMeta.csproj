@@ -70,6 +70,9 @@
     <Compile Include="CtrlShowTIME.xaml.cs">
       <DependentUpon>CtrlShowTIME.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewChunkWindow.xaml.cs">
+      <DependentUpon>NewChunkWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StringUtils.cs" />
     <Page Include="CtrlShowITXT.xaml">
       <SubType>Designer</SubType>
@@ -87,7 +90,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ImageData.cs" />
     <Compile Include="ByteUtils.cs" />
     <Compile Include="ChunkType.cs" />
     <Compile Include="CtrlShowIHDR.xaml.cs">
@@ -99,7 +101,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Page1.xaml">
+    <Page Include="NewChunkWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,9 +115,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ParsedData.cs" />
     <Compile Include="PngDataChunk.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">

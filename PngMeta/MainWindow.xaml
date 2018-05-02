@@ -14,27 +14,20 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
-        <!--<StackPanel Orientation="Vertical" Margin="5">-->
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" Margin="2" >
             <TextBlock x:Name="uiChunkListTitle" Text="No image loaded" Grid.Row="0"/>
-            <ListBox x:Name="uiChunkList" Width="100" Height="300" SelectionChanged="uiChunkList_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
+            <ListBox x:Name="uiChunkList" Width="100" Height="270" SelectionChanged="uiChunkList_SelectionChanged" ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.Row="1">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Type}" ToolTipService.ToolTip="{Binding Description}" ToolTipService.InitialShowDelay="0"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button x:Name="btnAdd" Content="Add chunk" IsEnabled="False" Margin="12,0,12,1" HorizontalAlignment="Center" Width="76" Grid.Row="2" Height="21" VerticalAlignment="Bottom" Click="btnAdd_Click"/>
-            <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Click="btnOpen_Click" Grid.Row="3"/>
-            <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Grid.Row="4" Click="btnSave_Click"/>
-        </Grid>
+            <Button x:Name="btnDelete" Content="Delete chunk" IsEnabled="False" Margin="1" Width="80" Click="btnDelete_Click"/>
+            <Button x:Name="btnAdd" Content="Add comment" IsEnabled="False" Margin="1" HorizontalAlignment="Center" Width="80" Height="21" VerticalAlignment="Bottom" Click="btnAdd_Click"/>
+            <Button x:Name="btnOpen" Content="Open" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="80" Click="btnOpen_Click"/>
+            <Button x:Name="btnSave" Content="Save" IsEnabled="False" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="80" Click="btnSave_Click"/>
+        </StackPanel>
 
         <TabControl Grid.Column="1">
             <TabItem Header="Chunk contents" x:Name="tabChunkContents">
