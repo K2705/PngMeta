@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PngMeta"
         xmlns:controls="clr-namespace:PngMeta"
         mc:Ignorable="d"
-        Title="MainWindow" Height="420.588" Width="758.333">
+        Title="PNG Metadata Editor" Height="420" Width="760">
 
     <Grid>
         <Grid.ColumnDefinitions>
