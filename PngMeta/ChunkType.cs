@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PngMeta
 {
+    /// <summary>
+    /// four-character identifier for a PNG datachunk
+    /// </summary>
     public class ChunkType
     {
         private string strType;
@@ -38,6 +41,10 @@ namespace PngMeta
             }
         }
 
+        /// <summary>
+        /// short description of this chunk type (if known)
+        /// </summary>
+        /// <returns>human-readable description as string</returns>
         public string Description()
         {
             return Description(this);
@@ -71,7 +78,11 @@ namespace PngMeta
             return Type.SequenceEqual(t.Type);
         }
 
-
+        /// <summary>
+        /// short description of given chunk type (if known)
+        /// </summary>
+        /// <param name="chunkType">chunk type to describe</param>
+        /// <returns>human-readable description, as string</returns>
         public static string Description(ChunkType chunkType)
         {
             switch (chunkType.ToString())

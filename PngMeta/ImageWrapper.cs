@@ -34,6 +34,10 @@ namespace PngMeta
             FileChunks = ImageData.GetChunks(FileBytes);
         }
         
+        /// <summary>
+        /// Compile all data chunks back into a single byte array for saving
+        /// </summary>
+        /// <returns>byte[] containing whole image</returns>
         public byte[] GetImageBuffer()
         {
             List<byte> bytes = new List<byte>();
@@ -46,6 +50,11 @@ namespace PngMeta
             return bytes.ToArray();
         }
 
+        /// <summary>
+        /// Save image
+        /// </summary>
+        /// <param name="path">path to save to, as string</param>
+        /// <param name="buffer">image as byte array</param>
         internal void SaveImage(string path, byte[] buffer)
         {
             File.WriteAllBytes(path, buffer);
