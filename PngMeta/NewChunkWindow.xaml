@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PngMeta"
         mc:Ignorable="d"
-        Title="Add text comment" Height="450" Width="800">
+        Title="Add text comment" Height="350" Width="600">
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="30">
+        <StackPanel Orientation="Vertical" Margin="25">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />

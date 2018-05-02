@@ -35,7 +35,7 @@ namespace PngMeta
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Image.FileChunks.Insert(Image.FileChunks.Count - 2, ImageData.NewTextChunk(tbKeyword.Text, tbValue.Text)); // must be before IEND
+            Image.FileChunks.Insert(Image.FileChunks.Count - 1, ImageData.NewTextChunk(tbKeyword.Text, tbValue.Text)); // must be before IEND
             this.Close();
         }
     }
