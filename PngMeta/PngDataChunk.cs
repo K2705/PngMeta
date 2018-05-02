@@ -169,7 +169,7 @@ namespace PngMeta
         {
             byte[] buffer = new byte[Length + 4];
             Array.Copy(Type.Type, 0, buffer, 0, 4);
-            Array.Copy(data, 0, buffer, 4, Length);
+            Array.Copy(Data, 0, buffer, 4, Length);
             return Crc.GetCRC(buffer);
         }
        
@@ -184,7 +184,7 @@ namespace PngMeta
                 ret.Append((char)b);
             }
             ret.Append(' ');
-            foreach (byte b in data)
+            foreach (byte b in Data)
             {
                 ret.Append(b);
             }
