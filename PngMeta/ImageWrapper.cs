@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace PngMeta
 {
-    class ImageWrapper
+    public class ImageWrapper
     {
         public List<PngDataChunk> FileChunks { get; private set; }
         public Uri FilePath { get; private set; }
