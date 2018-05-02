@@ -205,7 +205,7 @@ namespace PngMeta
         public override bool Equals(object obj)
         {
             PngDataChunk chunk = obj as PngDataChunk;
-            if (obj == null) return false;
+            if (chunk == null) return false;
             return CalculateCrc() == chunk.CalculateCrc();
         }
     }
